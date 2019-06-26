@@ -1,11 +1,11 @@
 # Lava Jato
 
 ## Equipe {
-           ### Anderson Oliveira,
-           ###Bruno Henrique da Cruz,
-           ###Gabriel Pedro,
-           ###Vinicius Rocha
-      ##  }
+           Anderson Oliveira,
+           Bruno Henrique da Cruz,
+           Gabriel Pedro,
+           Vinicius Rocha
+##        }
 
 Criação de Sistema Laravel com os formulários de cadastro, relacionamentos e funcionalidade básica para cada um dos cases apresentados na aula 01. O mesmo apresentar os conceitos vistos em sala de aula, como Migrate, Model, Controllers, Views e Relacionamento, assim como as funcionalidades básicas de cada case;
 
