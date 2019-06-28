@@ -53,8 +53,9 @@
 							</div>	
 						</div>
 						<div class="modal-footer">
-							<button type="submit" class="btn btn-light">Registrar</button>
-							<button type="submit" class="btn btn-success"> <a href="dash/dashboard.html">Entrar</a></button>
+							<a href="{{ route('register') }}"><button type="submit" class="btn btn-light">Registrar</button></a>
+							<a href="{{ route('login') }}"><button type="submit" class="btn btn-success">Entrar</button></a>
+							<!-- <button type="submit" class="btn btn-success"> <a href="dash/dashboard.html">Entrar</a></button> -->
 						</div>
 					</div>
 				</div>
