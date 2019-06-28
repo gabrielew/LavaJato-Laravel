@@ -122,7 +122,7 @@
 									<a href="dash/dashboard.html">Dashboard</a>
 								</li> -->
 								<li>
-									<button class="btn btn-danger" data-toggle="modal" data-target="#loginWeb"><i class="far fa-user"></i> Login</button>
+									<button class="btn btn-danger" data-toggle="modal" data-target="#loginWeb"><i class="far fa-user"></i>Entrar</button>
 								</li>
 							</ul>
 						</div>
