@@ -1,3 +1,4 @@
+<link rel="icon" href="{{ asset('img/favicon.ico') }}" >
 @extends('layouts.app')
 
 @section('content')
@@ -8,7 +9,7 @@
     <meta name="author" content="">
     <title>TabaJara - Dashboard</title>
     <!-- ICONE CARRINHO -->
-    <link rel="icon" href="{{ asset('img/favicon.ico') }}" >
+    
     <link href="https://fonts.googleapis.com/css?family=Nunito:200,600" rel="stylesheet">
 
     <link rel="stylesheet" href="{{ asset('js/fontawesome-free/css/all.min.css') }}">
