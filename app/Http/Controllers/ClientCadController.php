@@ -8,15 +8,13 @@ use Illuminate\Support\Facades\Validator;
 
 class ClientCadController extends Controller
 {
+    protected $redirectTo = '/home';
 
-    protected function validator(array $data)
+    public function __construct()
     {
-        return Validator::make($data, [
-            'model' => ['required', 'string', 'max:255'],
-            'plate' => ['required', 'string', 'max:255', 'unique:cars'],
-            'color' => ['required', 'string'],
-        ]);
+        $this->middleware('auth');
     }
+
     /**
      * Display a listing of the resource.
      *
@@ -27,14 +25,25 @@ class ClientCadController extends Controller
         return view('clientcad');
     }
 
+    protected function validator(array $data)
+    {
+        return Validator::make($data, [
+            'name' => ['required', 'string', 'max:255'],
+            'cpf' => ['required', 'string', 'max:20', 'unique:clients'],
+        ]);
+    }
+
     /**
      * Show the form for creating a new resource.
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
+    public function create(array $data)
     {
-        //
+        return User::create([
+            'name' => $data['name'],
+            'cpf' => $data['cpf']
+        ]);
     }
 
     /**
@@ -45,7 +54,11 @@ class ClientCadController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $client = new ClientCad;
+        $client->name = $request->name;
+        $client->cpf = $request->cpf;
+        $client->save();
+        return redirect()->route('home')->with('message', 'Cliente cadastrado com sucesso!');
     }
 
     /**
@@ -67,7 +80,8 @@ class ClientCadController extends Controller
      */
     public function edit($id)
     {
-        //
+        $client = ClientCad::findOrFail($id);
+        return view('home', compact('client'));
     }
 
     /**
@@ -79,7 +93,11 @@ class ClientCadController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $client = ClientCad::findOrFail($id);
+        $client->name = $request->name;
+        $client->cpf = $request->cpf;
+        $client->save();
+        return redirect()->route('home')->with('message', "Cliente Atualizado com sucesso!");
     }
 
     /**
@@ -90,6 +108,8 @@ class ClientCadController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $client = ClientCad::findOrFail($id);
+        $client->delete();
+        return redirect()->route('home')->with('alert-success', 'Cliente removido da base de dados!');
     }
 }
