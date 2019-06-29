@@ -12,8 +12,6 @@
 
     <!-- CSS STYLES -->
     
-    <link href="vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
-    <link href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i" rel="stylesheet">
     <link href="{{ asset('css/sb-admin-2.min.css') }}" rel="stylesheet">
     <!-- CSS STYLES -->
 
@@ -41,21 +39,21 @@
                   
                   <div class="col-sm-6">
                     <p></p>
-                    <input type="text" class="form-control form-control-user" id="model" name="model" placeholder="{{ __('Modelo') }}">
+                    <input type="text" class="form-control form-control-user" id="model" name="model" placeholder="{{ __('Modelo') }}" required>
                   </div>
                   <div class="col-sm-6">
                     <p></p>
-                    <input type="text" class="form-control form-control-user" id="color" name="color" placeholder="{{ __('Cor') }}">
+                    <input type="text" class="form-control form-control-user" id="color" name="color" placeholder="{{ __('Cor') }}" required>
                   </div>
                 </div>
                 <div class="form-group">
-                <input type="text" class="form-control form-control-user" id="plate" name="plate" minlength="7" maxlength="7" placeholder="{{ __('Placa') }}">
+                <input type="text" class="form-control form-control-user" id="plate" name="plate" minlength="7" maxlength="7" placeholder="{{ __('Placa') }}" required>
                 </div>
                 <div class="form-group">
                 <select class="form-control" name="id_client" id="id_client" required>
                   <option value="" disabled selected>Selecione o cliente</option>
                   @foreach($client as $clients)
-                  <option value="{{$clients->id}}">{{$clients->name}}</option>
+                  <option value="{{$clients->id}}">{{$clients->name}} CPF: {{$clients->cpf}}</option>
                   @endforeach
                 </select>
                 </div>
@@ -72,16 +70,6 @@
 
   </div>
 </form>
-
-  <!-- Bootstrap core JavaScript-->
-  <script src="{{ asset('js/jquery/jquery.min.js') }}"></script>
-  <script src="{{ asset('js/bootstrap/js/bootstrap.bundle.min.js') }}"></script>
-
-  <!-- Core plugin JavaScript-->
-  <script src="{{ asset('js/jquery-easing/jquery.easing.min.js') }}"></script>
-
-  <!-- Custom scripts for all pages-->
-  <script src="{{ asset('js/sb-admin-2.min.js') }}"></script>
 
 </body>
 
