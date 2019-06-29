@@ -23,7 +23,9 @@ class AutomovelCadController extends Controller
 
     public function index()
     {
-        return view('automovelcad');
+        // $client = \App\Models\AutomovelCad::all();
+        $client = AutomovelCad::get();
+        return view('automovelcad', compact('client'));
     }
 
     /**

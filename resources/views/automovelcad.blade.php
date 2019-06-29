@@ -54,6 +54,9 @@
                 <div class="form-group">
                 <select class="form-control" name="client" id="client" required>
                   <option value="">Selecione o cliente</option>
+                  @foreach($client as $clients)
+                  <option value="{{$clients->id}}">{{$clients->model}}</option>
+                  @endforeach
                 </select>
                 </div>
                 <button type="submit" class="btn btn-primary btn-user btn-block">{{ __('Cadastrar') }}</button>
