@@ -76,7 +76,7 @@ class AutomovelCadController extends Controller
         $car->color = $request->color;
         $car->plate = $request->plate;
         $car->save();
-        return redirect()->route('home.index')->with('message', 'Veículo cadastrado com sucesso!');
+        return redirect()->route('home')->with('message', 'Veículo cadastrado com sucesso!');
     }
 
     /**
@@ -99,7 +99,7 @@ class AutomovelCadController extends Controller
     public function edit(AutomovelCad $automovelCad)
     {
         $car = AutomovelCad::findOrFail($id);
-        return view('home.index', compact('car'));
+        return view('home', compact('car'));
     }
 
     /**
@@ -116,7 +116,7 @@ class AutomovelCadController extends Controller
         $car->color = $request->color;
         $car->plate = $request->plate;
         $car->save();
-        return redirect()->route('home.index')->with('message', "Carro Atualizado com sucesso!");
+        return redirect()->route('home')->with('message', "Carro Atualizado com sucesso!");
     }
 
     /**
@@ -129,6 +129,6 @@ class AutomovelCadController extends Controller
     {
         $car = AutomovelCad::findOrFail($id);
         $car->delete();
-        return redirect()->route('home.index')->with('alert-success', 'Veículo removido da base de dados!');
+        return redirect()->route('home')->with('alert-success', 'Veículo removido da base de dados!');
     }
 }
