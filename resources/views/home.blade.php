@@ -62,7 +62,7 @@
                 <div class="bg-white py-2 collapse-inner rounded">
                 <h6 class="collapse-header">Serviços:</h6>
                 <a class="collapse-item" href="login.html">Registro de entrada</a>
-                <a class="collapse-item" href="register.html">Cadastrar Veículo</a>
+                <a class="collapse-item" href="{{ url('/automovelcad') }}>Cadastrar Veículo</a>
                 <a class="collapse-item" href="forgot-password.html">Tipos de Lavagens</a>
                 <!-- <div class="collapse-divider"></div>
                 <h6 class="collapse-header">Other Pages:</h6>
