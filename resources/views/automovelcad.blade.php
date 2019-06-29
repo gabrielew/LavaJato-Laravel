@@ -51,6 +51,11 @@
                 <div class="form-group">
                 <input type="text" class="form-control form-control-user" id="plate" name="plate" minlength="7" maxlength="7" placeholder="{{ __('Placa') }}">
                 </div>
+                <div class="form-group">
+                <select class="form-control" name="client" id="client" required>
+                  <option value="">Selecione o cliente</option>
+                </select>
+                </div>
                 <button type="submit" class="btn btn-primary btn-user btn-block">{{ __('Cadastrar') }}</button>
                 
                 <hr>
