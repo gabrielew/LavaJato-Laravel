@@ -2,10 +2,21 @@
 
 namespace App\Http\Controllers;
 
+use App\ClientCad;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Validator;
 
-class ClientCad extends Controller
+class ClientCadController extends Controller
 {
+
+    protected function validator(array $data)
+    {
+        return Validator::make($data, [
+            'model' => ['required', 'string', 'max:255'],
+            'plate' => ['required', 'string', 'max:255', 'unique:cars'],
+            'color' => ['required', 'string'],
+        ]);
+    }
     /**
      * Display a listing of the resource.
      *
@@ -13,7 +24,7 @@ class ClientCad extends Controller
      */
     public function index()
     {
-        //
+        return view('clientcad');
     }
 
     /**
