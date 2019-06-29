@@ -18,4 +18,5 @@ Route::get('/', function () {
 Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
-Route::get('/automovelcad', 'AutomovelCadController@index');
+Route::resource('automovelcad', 'AutomovelCadController')->middleware('auth');
+// Route::post('/automovelcad', 'AutomovelCadController@index');
