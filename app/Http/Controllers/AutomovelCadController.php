@@ -12,19 +12,54 @@ class AutomovelCadController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+
+    // protected $redirectTo = '/home';
+
+    // public function __construct()
+    // {
+    //     $this->middleware('auth');
+    // }
+
     public function index()
     {
-        //
+        return view('automovelcad');
     }
+
+    /**
+     * Get a validator for an incoming registration request.
+     *
+     * @param  array  $data
+     * @return \Illuminate\Contracts\Validation\Validator
+     */
+    protected function validator(array $data)
+    {
+        return Validator::make($data, [
+            'model' => ['required', 'string', 'max:255'],
+            'plate' => ['required', 'string', 'max:255', 'unique:cars'],
+            'color' => ['required', 'string'],
+        ]);
+    }
+
+    /**
+     * Create a new user instance after a valid registration.
+     *
+     * @param  array  $data
+     * @return \App\User
+     */
 
     /**
      * Show the form for creating a new resource.
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
+    public function create(array $data)
     {
-        //
+        return User::create([
+            'model' => $data['model'],
+            'plate' => $data['plate'],
+            'color' => $data['color'],
+        ]);
+        
     }
 
     /**
