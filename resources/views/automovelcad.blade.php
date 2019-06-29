@@ -52,10 +52,10 @@
                 <input type="text" class="form-control form-control-user" id="plate" name="plate" minlength="7" maxlength="7" placeholder="{{ __('Placa') }}">
                 </div>
                 <div class="form-group">
-                <select class="form-control" name="client" id="client" required>
+                <select class="form-control" name="id_client" id="id_client" required>
                   <option value="">Selecione o cliente</option>
                   @foreach($client as $clients)
-                  <option value="{{$clients->id}}">{{$clients->model}}</option>
+                  <option value="{{$clients->id}}">{{$clients->name}}</option>
                   @endforeach
                 </select>
                 </div>
