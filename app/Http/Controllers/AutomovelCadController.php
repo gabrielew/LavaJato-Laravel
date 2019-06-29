@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\AutomovelCad;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 
@@ -23,8 +24,8 @@ class AutomovelCadController extends Controller
 
     public function index()
     {
-        // $client = \App\Models\AutomovelCad::all();
-        $client = AutomovelCad::get();
+        
+        $client = DB::table('clients')->get();
         return view('automovelcad', compact('client'));
     }
 
@@ -61,6 +62,7 @@ class AutomovelCadController extends Controller
             'model' => $data['model'],
             'plate' => $data['plate'],
             'color' => $data['color'],
+            'id_client' => $data['id_client'],
         ]);
         
     }
@@ -77,6 +79,7 @@ class AutomovelCadController extends Controller
         $car->model = $request->model;
         $car->color = $request->color;
         $car->plate = $request->plate;
+        $car->id_client = $request->id_client;
         $car->save();
         return redirect()->route('home')->with('message', 'Veículo cadastrado com sucesso!');
     }
@@ -117,6 +120,7 @@ class AutomovelCadController extends Controller
         $car->model = $request->model;
         $car->color = $request->color;
         $car->plate = $request->plate;
+        $car->id_client = $request->id_client;
         $car->save();
         return redirect()->route('home')->with('message', "Carro Atualizado com sucesso!");
     }
