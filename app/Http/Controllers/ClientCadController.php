@@ -30,6 +30,7 @@ class ClientCadController extends Controller
         return Validator::make($data, [
             'name' => ['required', 'string', 'max:255'],
             'cpf' => ['required', 'string', 'max:20', 'unique:clients'],
+            'birthdate' => ['required', 'date', 'max:255'],
         ]);
     }
 
@@ -42,7 +43,8 @@ class ClientCadController extends Controller
     {
         return User::create([
             'name' => $data['name'],
-            'cpf' => $data['cpf']
+            'cpf' => $data['cpf'],
+            'birthdate' => $data['birthdate'],
         ]);
     }
 
@@ -57,6 +59,7 @@ class ClientCadController extends Controller
         $client = new ClientCad;
         $client->name = $request->name;
         $client->cpf = $request->cpf;
+        $client->birthdate = $request->birthdate;
         $client->save();
         return redirect()->route('home')->with('message', 'Cliente cadastrado com sucesso!');
     }
@@ -96,6 +99,7 @@ class ClientCadController extends Controller
         $client = ClientCad::findOrFail($id);
         $client->name = $request->name;
         $client->cpf = $request->cpf;
+        $client->birthdate = $request->birthdate;
         $client->save();
         return redirect()->route('home')->with('message', "Cliente Atualizado com sucesso!");
     }
