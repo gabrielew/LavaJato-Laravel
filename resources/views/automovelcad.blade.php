@@ -16,7 +16,7 @@
     <!-- CSS STYLES -->
 
 <body class="bg-gradient-primary">
-<form method="GET" action="{{ route('home') }}">
+<form method="POST" action="">
 @csrf
   <div class="container">
 

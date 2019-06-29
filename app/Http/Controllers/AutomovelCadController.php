@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\AutomovelCad;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Validator;
 
 class AutomovelCadController extends Controller
 {
@@ -13,12 +14,12 @@ class AutomovelCadController extends Controller
      * @return \Illuminate\Http\Response
      */
 
-    // protected $redirectTo = '/home';
+    protected $redirectTo = '/home';
 
-    // public function __construct()
-    // {
-    //     $this->middleware('auth');
-    // }
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
 
     public function index()
     {
