@@ -48,7 +48,7 @@
                   </div>
                   <div class="col-sm-6">
                     <p></p>
-                    <input id="cpf" type="text" class="form-control" name="cpf" value="{{ old('cpf') }}" maxlength="14">
+                    <input id="cpf" type="text" class="form-control" name="cpf" value="{{ old('cpf') }}" maxlength="14" placeholder="CPF">
                   </div>
                 </div>
                 <div class="form-group">
