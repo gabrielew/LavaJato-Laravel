@@ -53,7 +53,7 @@
                 </div>
                 <div class="form-group">
                 <select class="form-control" name="id_client" id="id_client" required>
-                  <option value="">Selecione o cliente</option>
+                  <option value="" disabled selected>Selecione o cliente</option>
                   @foreach($client as $clients)
                   <option value="{{$clients->id}}">{{$clients->name}}</option>
                   @endforeach
