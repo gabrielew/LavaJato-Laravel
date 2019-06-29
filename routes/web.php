@@ -19,4 +19,4 @@ Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
 Route::resource('automovelcad', 'AutomovelCadController')->middleware('auth');
-// Route::post('/automovelcad', 'AutomovelCadController@index');
+Route::resource('clientcad', 'ClientCadController')->middleware('auth');
