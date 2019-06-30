@@ -37,4 +37,31 @@ class HomeController extends Controller
                                        ->get();
         return view('home', compact('client', 'service', 'wash', 'washYear'));
     }
+
+    public function listar(Request $request) {   
+        // Consulta os dados a serem exibidos
+        $query = DB::table('washes')->join('clients AS cli', 'washes.id_client', '=', 'cli.id')
+                                    ->join('cars AS car', 'washes.id_car', '=', 'car.id')
+                                    ->join('services AS ser', 'washes.id_service', '=', 'ser.id')
+                                    ->select(DB::raw('cli.id as cli_id, cli.name, cli.cpf, cli.birthdate,
+                                                      car.id as car_id, car.model, car.plate, car.color,
+                                                      ser.id as ser_id, ser.name, ser.price'))
+                                    ->order_by('ser.created_at', 'desc')
+                                    ->get();
+        // Monta os dados de acordo com o datatable
+        $datatable =  Datatables::of($query);
+
+        /**
+        *
+        * Retorna os dados no formato 
+        * requisitado pelo datatable e 
+        * impede o envio da coluna action
+        * para a tabela.
+        *
+        * Isso porque a coluna action,
+        * não possui dados, e sim os botões 
+        * de ação editar e excluir. 
+        **/
+        return $datatable->blacklist(['action'])->make(true);
+    }   
 }
