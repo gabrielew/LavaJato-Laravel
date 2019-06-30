@@ -27,6 +27,9 @@ class HomeController extends Controller
         // $client = DB::table('clients')->count('id');
         $client = DB::table('clients')->select(DB::raw('count(id) as id_client'))->get();
         $service = DB::table('services')->select(DB::raw('count(id) as id_service'))->get();
-        return view('home', compact('client', 'service'));
+        $wash = DB::table('washes')->join('services', 'wash.id_service', '=', 'services.id')
+                                   ->select(DB::raw('services.id, services.name, sum(services.price)'))
+                                   ->where('washes.created_at > (NOW() - INTERVAL 30 DAY)');
+        return view('home', compact('client', 'service', 'wash'));
     }
 }
