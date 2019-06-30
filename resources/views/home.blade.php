@@ -1,7 +1,20 @@
 <!-- <link rel="icon" href="{{ asset('img/favicon.ico') }}" > -->
 @extends('layouts.app')
-
+@push('scripts')
+<script>
+      $(document).ready(function() {
+        $('#table').DataTable();
+      });
+</script>
+@endpush
 @section('content')
+@push('scripts')
+<script>
+      $(document).ready(function() {
+        $('#table').DataTable();
+      });
+</script>
+@endpush
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
@@ -172,7 +185,7 @@
                   <div class="row no-gutters align-items-center">
                     <div class="col mr-2">
                       <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">Lavagens (Mensais)</div>
-                      <div class="h5 mb-0 font-weight-bold text-gray-800">@foreach($wash as $washes){{$washes->price}}@endforeach</div>
+                      <div class="h5 mb-0 font-weight-bold text-gray-800">@foreach($wash as $washes)R${{$washes->price}}@endforeach</div>
                     </div>
                     <div class="col-auto">
                       <i class="fas fa-calendar fa-2x text-gray-300"></i>
@@ -190,7 +203,7 @@
                     <div class="col mr-2">
                       <div class="text-xs font-weight-bold text-success text-uppercase mb-1">Lavagens (Anuais)</div>
 
-                      <div class="h5 mb-0 font-weight-bold text-gray-800">@foreach($washYear as $washesY){{$washesY->price}}@endforeach</div>
+                      <div class="h5 mb-0 font-weight-bold text-gray-800">@foreach($washYear as $washesY)R${{$washesY->price}}@endforeach</div>
                       
                     </div>
                     <div class="col-auto">
@@ -269,9 +282,34 @@
                   </div>
                 </div>
                 <!-- Card Body -->
-                <div class="card-body">
-                  <div class="chart-area">
-                    <canvas id="myAreaChart"></canvas>
+                <div class="">
+                  <div class="">
+                      <table class="table" id="table">
+                        <thead>
+                            <tr>
+                                <th class="text-center">#</th>
+                                <th class="text-center">First Name</th>
+                                <th class="text-center">Last Name</th>
+                                <th class="text-center">Email</th>
+                                <th class="text-center">Gender</th>
+                                <th class="text-center">Country</th>
+                                <th class="text-center">Salary ($)</th>
+                                <th class="text-center">Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>1</td>
+                                <td>2</td>
+                                <td>3</td>
+                                <td>4</td>
+                                <td>5</td>
+                                <td>6</td>
+                                <td>7</td>
+                                <td>8</td>
+                            </tr>
+                        </tbody>
+                      </table>
                   </div>
                 </div>
               </div>
@@ -500,6 +538,12 @@
     <script src="{{ asset('js/chart-area-demo.js') }}"></script>
     <script src="{{ asset('js/chart-pie-demo.js') }}"></script>
     <script src="https://kit.fontawesome.com/bd13c5bef1.js"></script>
+
+
+    <script src="//cdn.datatables.net/1.10.12/js/jquery.dataTables.min.js"></script>
+    <script src="https://cdn.datatables.net/1.10.12/js/dataTables.bootstrap.min.js"></script>
+    <link rel="stylesheet" href="https://cdn.datatables.net/1.10.12/css/dataTables.bootstrap.min.css">
+    
     
     
 </body>
