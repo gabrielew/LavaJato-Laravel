@@ -2,10 +2,12 @@
 
 namespace App\Http\Controllers;
 
-use App\Services;
+use App\ServiceCad;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Validator;
+use Illuminate\Support\Facades\DB;
 
-class ServicesCadController extends Controller
+class ServiceCadController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -14,7 +16,16 @@ class ServicesCadController extends Controller
      */
     public function index()
     {
-        //
+        $service = DB::table('services')->get();
+        return view('servicescad', compact('service'));
+    }
+
+    protected function validator(array $data)
+    {
+        return Validator::make($data, [
+            'name' => ['required', 'string', 'max:255'],
+            'price' => ['required', 'float',]
+        ]);
     }
 
     /**
@@ -22,9 +33,12 @@ class ServicesCadController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
+    public function create(array $data)
     {
-        //
+        return User::create([
+            'name' => $data['name'],
+            'price' => $data['price']
+        ]);
     }
 
     /**
@@ -35,7 +49,11 @@ class ServicesCadController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $service = new ServiceCad;
+        $service->name = $request->name;
+        $service->price = $request->price;
+        $service->save();
+        return redirect()->route('home')->with('message', 'Serviço cadastrado com sucesso!');
     }
 
     /**
@@ -57,7 +75,8 @@ class ServicesCadController extends Controller
      */
     public function edit(Services $services)
     {
-        //
+        $service = ServiceCad::findOrFail($id);
+        return view('home', compact('service'));
     }
 
     /**
@@ -69,7 +88,11 @@ class ServicesCadController extends Controller
      */
     public function update(Request $request, Services $services)
     {
-        //
+        $service = ServiceCad::findOrFail($id);
+        $service->name = $request->name;
+        $service->price = $request->price;
+        $service->save();
+        return redirect()->route('home')->with('message', "Serviço Atualizado com sucesso!");
     }
 
     /**
@@ -80,6 +103,8 @@ class ServicesCadController extends Controller
      */
     public function destroy(Services $services)
     {
-        //
+        $service = ServiceCad::findOrFail($id);
+        $service->delete();
+        return redirect()->route('home')->with('alert-success', 'Serviço removido da base de dados!');
     }
 }
