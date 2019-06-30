@@ -18,6 +18,7 @@ Route::get('/', function () {
 Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
+Route::resource('usercad', 'UserCadController');
 Route::resource('automovelcad', 'AutomovelCadController')->middleware('auth');
 Route::resource('clientcad', 'ClientCadController')->middleware('auth');
 Route::resource('servicescad', 'ServiceCadController')->middleware('auth');
