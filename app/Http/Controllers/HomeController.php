@@ -26,6 +26,7 @@ class HomeController extends Controller
     {
         // $client = DB::table('clients')->count('id');
         $client = DB::table('clients')->select(DB::raw('count(id) as id_client'))->get();
-        return view('home', compact('client'));
+        $service = DB::table('services')->select(DB::raw('count(id) as id_service'))->get();
+        return view('home', compact('client', 'service'));
     }
 }
