@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class HomeController extends Controller
 {
@@ -23,6 +24,8 @@ class HomeController extends Controller
      */
     public function index()
     {
-        return view('home');
+        // $client = DB::table('clients')->count('id');
+        $client = DB::table('clients')->select(DB::raw('count(id) as id_client'))->get();
+        return view('home', compact('client'));
     }
 }
