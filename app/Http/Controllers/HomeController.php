@@ -35,33 +35,17 @@ class HomeController extends Controller
                                        ->select(DB::raw('count(services.id) as total, sum(services.price) as price'))
                                        ->where('washes.created_at', '>', DB::raw('(NOW() - INTERVAL 1 YEAR)'))
                                        ->get();
-        return view('home', compact('client', 'service', 'wash', 'washYear'));
-    }
 
-    public function listar(Request $request) {   
-        // Consulta os dados a serem exibidos
         $query = DB::table('washes')->join('clients AS cli', 'washes.id_client', '=', 'cli.id')
-                                    ->join('cars AS car', 'washes.id_car', '=', 'car.id')
-                                    ->join('services AS ser', 'washes.id_service', '=', 'ser.id')
-                                    ->select(DB::raw('cli.id as cli_id, cli.name, cli.cpf, cli.birthdate,
-                                                      car.id as car_id, car.model, car.plate, car.color,
-                                                      ser.id as ser_id, ser.name, ser.price'))
-                                    ->order_by('ser.created_at', 'desc')
-                                    ->get();
-        // Monta os dados de acordo com o datatable
-        $datatable =  Datatables::of($query);
+                                       ->join('cars AS car', 'washes.id_car', '=', 'car.id')
+                                       ->join('services AS ser', 'washes.id_service', '=', 'ser.id')
+                                       ->select(DB::raw('washes.id, cli.name as cliente, cli.cpf as cpf,
+                                                         car.model as carro, car.plate as placa, car.color as cor,
+                                                         ser.name as servico, ser.price as valor, washes.created_at as data'))
+                                       ->orderBy('washes.created_at', 'DESC')
+                                       ->paginate(5);
+        $datatable = $query;
 
-        /**
-        *
-        * Retorna os dados no formato 
-        * requisitado pelo datatable e 
-        * impede o envio da coluna action
-        * para a tabela.
-        *
-        * Isso porque a coluna action,
-        * não possui dados, e sim os botões 
-        * de ação editar e excluir. 
-        **/
-        return $datatable->blacklist(['action'])->make(true);
-    }   
+        return view('home', compact('client', 'service', 'wash', 'washYear', 'datatable'));
+    }  
 }
