@@ -36,10 +36,7 @@
                     <input type="text" class="form-control form-control-user" id="price" name="price" placeholder="{{ __('Valor') }}" required>
                   </div>
                 </div>
-
-
                   <div class="form-group">
-                      <label for="id_service">Serviços já cadastrados</label>
                     <select class="custom-select">
                           <option disabled selected>Serviços já cadastrados</option>
                           @foreach($service as $services)
