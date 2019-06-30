@@ -309,18 +309,58 @@
                             <td>{{$dt->servico}}</td>
                             <td>{{$dt->valor}}</td>
                             <td>{{$dt->data}}</td>
-                            <td><a href=""><i class="fas fa-eye"></i>{{$dt->id}}</a></td>
+                              <td><a href="{{ url('listservice', $dt->id) }}" id="id" name="id"><i class="fas fa-eye"></i></a></td>
+                            
                           </tr>
                           @endforeach
-                        
+                          
                         </tbody>
                     </table>
+                      <div class="modal fade" role="dialog" id="ver">
+                        <div class="modal-dialog">
+                            <div class="modal-content">
+                              <div class="modal-header">
+                              <table id="table" class="col-md-12 table table-striped table-bordered">
+                                <thead>
+                                    <tr>
+                                      <th>Nome</th>
+                                      <th>CPF</th>
+                                      <th>Modelo</th>
+                                      <th>Placa</th>
+                                      <th>Cor</th>
+                                      <th>Serviço</th>
+                                      <th>Valor</th>
+                                      <th>Data Serviço</th>
+                                      <th>Ações</th>
+                                  </tr>
+                                </thead>
+                                <tbody>
+                                  @foreach($datatable as $dt)
+                                  <tr>
+                                      <td>{{$dt->cliente}}</td>
+                                      <td>{{$dt->cpf}}</td>
+                                      <td>{{$dt->carro}}</td>
+                                      <td>{{$dt->placa}}</td>
+                                      <td>{{$dt->cor}}</td>
+                                      <td>{{$dt->servico}}</td>
+                                      <td>{{$dt->valor}}</td>
+                                      <td>{{$dt->data}}</td>
+                                    <td><button data-toggle="modal" data-target="#ver"><i class="fas fa-eye"></i></button></td>
+                                  </tr>
+                                  @endforeach
+                                  </tbody>
+                                  </table>
+                                <!-- <button type="button" class="close" data-dismiss="modal">&times;</button> -->
+                              </div>
+                            
+                            </div>
+                          </div>
+                      </div>
+                      <!-- //Modal Login -->
                   </div>
                 </div>
               </div>
             </div>
-
-            
 
           <!-- Content Row -->
           <div class="row">
@@ -498,18 +538,18 @@
     <!-- Custom scripts for all pages-->
     <script src="{{ asset('js/sb-admin-2.min.js') }}"></script>
 
-    <!-- Page level plugins -->
-    <script src="{{ asset('js/chart.js/Chart.min.js') }}"></script>
-
-    <!-- Page level custom scripts -->
-    <script src="{{ asset('js/chart-area-demo.js') }}"></script>
-    <script src="{{ asset('js/chart-pie-demo.js') }}"></script>
     <script src="https://kit.fontawesome.com/bd13c5bef1.js"></script>
 
 
-    <script src="//cdn.datatables.net/1.10.12/js/jquery.dataTables.min.js"></script>
-    <script src="https://cdn.datatables.net/1.10.12/js/dataTables.bootstrap.min.js"></script>
-    <link rel="stylesheet" href="https://cdn.datatables.net/1.10.12/css/dataTables.bootstrap.min.css">
+    <script>
+    $(document).ready(function(){
+    $("#btnEye").click(function(){
+        //Recupere o Id do registro e passe para o seu modal
+        var trid = $(this).closest('tr').attr('id');
+        $("#btnEyee").attr("class", trid );
+    });
+});
+    </script>
     
 
 </body>
