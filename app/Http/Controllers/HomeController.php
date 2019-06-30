@@ -2,11 +2,14 @@
 
 namespace App\Http\Controllers;
 
+use App\Home;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
 class HomeController extends Controller
 {
+
+    private $totalPage = 5;
     /**
      * Create a new controller instance.
      *
@@ -43,9 +46,15 @@ class HomeController extends Controller
                                                          car.model as carro, car.plate as placa, car.color as cor,
                                                          ser.name as servico, ser.price as valor, washes.created_at as data'))
                                        ->orderBy('washes.created_at', 'DESC')
-                                       ->paginate(5);
+                                       ->paginate($this->totalPage);
         $datatable = $query;
 
         return view('home', compact('client', 'service', 'wash', 'washYear', 'datatable'));
     }  
+
+    // public function searchHistoric(Request $request, Historic $historic) {
+
+    //     $dataForm = $request->All();
+    //     $historic->search($dataForm, $this->totalPage);
+    // }
 }
