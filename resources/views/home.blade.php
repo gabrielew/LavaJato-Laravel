@@ -83,13 +83,14 @@
                 <i class="fas fa-fw fa-table"></i>
                 <span>Clientes</span></a>
             </li>
-
+            
+                                    
             <li class="nav-item">
-            <a class="nav-link" href="{{url('listservice')}}">
-                <i class="fas fa-chart-line"></i>
-                <span>Serviços realizados</span></a>
+            <a class="nav-link" href="{{ url('/usercad') }}">
+                <i class="fas fa-user"></i>
+                <span>Registrar Colaborador</span></a>
             </li>
-
+            
             <!-- Divider -->
             <hr class="sidebar-divider d-none d-md-block">
 
