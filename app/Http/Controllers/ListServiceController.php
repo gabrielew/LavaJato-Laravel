@@ -13,12 +13,27 @@ class ListServiceController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index(Request $request)
+    public function index($id)
     {
-        $id = $request->id;
-        $query = DB::table('washes')->select(DB::raw('washes.id, washes.id_client'))
-                                       ->where('id', $id);
-        return $query;
+        if(strlen($id) > 12) {
+            $query = DB::table('washes')->join('clients AS cli', 'washes.id_client', '=', 'cli.id')
+                                       ->join('cars AS car', 'washes.id_car', '=', 'car.id')
+                                       ->join('services AS ser', 'washes.id_service', '=', 'ser.id')
+                                       ->select(DB::raw('washes.id, cli.name as cliente, cli.cpf as cpf,
+                                                         car.model as carro, car.plate as placa, car.color as cor,
+                                                         ser.name as servico, ser.price as valor, washes.created_at as data'))
+                                       ->where('cli.cpf', $id)->get();
+        return view('listservice', compact('query'));
+        } else {
+            $query = DB::table('washes')->join('clients AS cli', 'washes.id_client', '=', 'cli.id')
+                                       ->join('cars AS car', 'washes.id_car', '=', 'car.id')
+                                       ->join('services AS ser', 'washes.id_service', '=', 'ser.id')
+                                       ->select(DB::raw('washes.id, cli.name as cliente, cli.cpf as cpf,
+                                                         car.model as carro, car.plate as placa, car.color as cor,
+                                                         ser.name as servico, ser.price as valor, washes.created_at as data'))
+                                       ->where('washes.id', $id)->get();
+        return view('listservice', compact('query'));
+        }
     }
 
 
@@ -51,9 +66,9 @@ class ListServiceController extends Controller
      */
     public function show(Request $request)
     {
-        $id = $request->id;
-        $r = listService::mostrar();
-        return $r;
+        // $id = $request->id;
+        // $r = listService::mostrar();
+        // return $r;
     }
 
     /**
