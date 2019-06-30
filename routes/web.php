@@ -22,4 +22,4 @@ Route::resource('automovelcad', 'AutomovelCadController')->middleware('auth');
 Route::resource('clientcad', 'ClientCadController')->middleware('auth');
 Route::resource('servicescad', 'ServiceCadController')->middleware('auth');
 Route::resource('washescad', 'WashCadController')->middleware('auth');
-Route::get('listservice/{id}', 'ListServiceController@show');
+Route::get('listservice/{id}', 'ListServiceController@index');
