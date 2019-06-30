@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\WashCad;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
+use Illuminate\Support\Facades\DB;
 
 class WashCadController extends Controller
 {
@@ -22,7 +23,16 @@ class WashCadController extends Controller
      */
     public function index()
     {
-        //
+        // $client = DB::table('clients')->select(DB::raw('count(id) as id_client'))->get();
+        // $service = DB::table('services')->select(DB::raw('count(id) as id_service'))->get();
+
+        $client = DB::table('cars')->join('clients', 'cars.id_client', '=', 'clients.id')
+                                   ->select(DB::raw('cars.id as car_id, cars.model, cars.plate, clients.id as cli_id,
+                                   clients.name, clients.cpf'))
+                                   ->get();
+        $service = DB::table('services')->select(DB::raw('services.id, services.name, services.price'))
+                                        ->get();
+        return view('washescad', compact('client', 'service'));
     }
 
     protected function validator(array $data)
@@ -56,10 +66,14 @@ class WashCadController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function store(Request $request)
-    {
+    {        
         $wash = new WashCad;
-        $wash->id_client = $request->id_client;
-        $wash->id_car = $request->id_car;
+        $result = $request->id_cc;
+        $resultExp = explode('|', $result);
+        $wash->id_client = $resultExp[0];
+        $wash->id_car = $resultExp[1];
+        // $wash->id_client = $request->id_client;
+        // $wash->id_car = $request->id_car;
         $wash->id_service = $request->id_service;
         $wash->save();
         return redirect()->route('home')->with('message', 'Lavagem cadastrada com sucesso!');
