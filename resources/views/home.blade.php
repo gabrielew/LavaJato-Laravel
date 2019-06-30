@@ -188,9 +188,9 @@
                 <div class="card-body">
                   <div class="row no-gutters align-items-center">
                     <div class="col mr-2">
-                      <div class="text-xs font-weight-bold text-success text-uppercase mb-1">Earnings (Annual)</div>
+                      <div class="text-xs font-weight-bold text-success text-uppercase mb-1">Lavagens (Anuais)</div>
 
-                      <div class="h5 mb-0 font-weight-bold text-gray-800">$215,00</div>
+                      <div class="h5 mb-0 font-weight-bold text-gray-800">@foreach($washYear as $washesY){{$washesY->price}}@endforeach</div>
                       
                     </div>
                     <div class="col-auto">

@@ -31,6 +31,10 @@ class HomeController extends Controller
                                    ->select(DB::raw('sum(services.price) as price'))
                                    ->where('washes.created_at', '>', DB::raw('(NOW() - INTERVAL 30 DAY)'))
                                    ->get();
-        return view('home', compact('client', 'service', 'wash'));
+        $washYear = DB::table('washes')->join('services', 'washes.id_service', '=', 'services.id')
+                                       ->select(DB::raw('sum(services.price) as price'))
+                                       ->where('washes.created_at', '>', DB::raw('(NOW() - INTERVAL 1 YEAR)'))
+                                       ->get();
+        return view('home', compact('client', 'service', 'wash', 'washYear'));
     }
 }
