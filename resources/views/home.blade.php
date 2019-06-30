@@ -263,11 +263,11 @@
           <div class="row">
 
             <!-- Area Chart -->
-            <div class="col-xl-8 col-lg-7">
+            <div class="col-xl-12 col-lg-12">
               <div class="card shadow mb-4">
                 <!-- Card Header - Dropdown -->
                 <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
-                  <h6 class="m-0 font-weight-bold text-primary">Earnings Overview</h6>
+                  <h6 class="m-0 font-weight-bold text-primary">Resumo últimas lavagens</h6>
                   <div class="dropdown no-arrow">
                     <a class="dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                       <i class="fas fa-ellipsis-v fa-sm fa-fw text-gray-400"></i>
@@ -283,62 +283,44 @@
                 </div>
                 <!-- Card Body -->
                 <div class="">
-                  <div class="">
-                    <table id="people-table" class="col-md-12 table table-striped table-bordered">
+                  <div class="">                    
+                    <table id="table" class="col-md-12 table table-striped table-bordered">
                         <thead>
                             <tr>
                               <th>Nome</th>
                               <th>CPF</th>
-                              <th>RG</th>
-                              <th>Telefone</th>
-                              <th width="17%">Ação</th>
+                              <th>Modelo</th>
+                              <th>Placa</th>
+                              <th>Cor</th>
+                              <th>Serviço</th>
+                              <th>Valor</th>
+                              <th>Data Serviço</th>
+                              <th>Ações</th>
                           </tr>
                         </thead>
+                        <tbody>
+                          @foreach($datatable as $dt)
+                          <tr>
+                            <td>{{$dt->cliente}}</td>
+                            <td>{{$dt->cpf}}</td>
+                            <td>{{$dt->carro}}</td>
+                            <td>{{$dt->placa}}</td>
+                            <td>{{$dt->cor}}</td>
+                            <td>{{$dt->servico}}</td>
+                            <td>{{$dt->valor}}</td>
+                            <td>{{$dt->data}}</td>
+                            <td><a href=""><i class="fas fa-eye"></i>{{$dt->id}}</a></td>
+                          </tr>
+                          @endforeach
+                        
+                        </tbody>
                     </table>
                   </div>
                 </div>
               </div>
             </div>
 
-            <!-- Pie Chart -->
-            <div class="col-xl-4 col-lg-5">
-              <div class="card shadow mb-4">
-                <!-- Card Header - Dropdown -->
-                <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
-                  <h6 class="m-0 font-weight-bold text-primary">Revenue Sources</h6>
-                  <div class="dropdown no-arrow">
-                    <a class="dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                      <i class="fas fa-ellipsis-v fa-sm fa-fw text-gray-400"></i>
-                    </a>
-                    <div class="dropdown-menu dropdown-menu-right shadow animated--fade-in" aria-labelledby="dropdownMenuLink">
-                      <div class="dropdown-header">Dropdown Header:</div>
-                      <a class="dropdown-item" href="#">Action</a>
-                      <a class="dropdown-item" href="#">Another action</a>
-                      <div class="dropdown-divider"></div>
-                      <a class="dropdown-item" href="#">Something else here</a>
-                    </div>
-                  </div>
-                </div>
-                <!-- Card Body -->
-                <div class="card-body">
-                  <div class="chart-pie pt-4 pb-2">
-                    <canvas id="myPieChart"></canvas>
-                  </div>
-                  <div class="mt-4 text-center small">
-                    <span class="mr-2">
-                      <i class="fas fa-circle text-primary"></i> Direct
-                    </span>
-                    <span class="mr-2">
-                      <i class="fas fa-circle text-success"></i> Social
-                    </span>
-                    <span class="mr-2">
-                      <i class="fas fa-circle text-info"></i> Referral
-                    </span>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
+            
 
           <!-- Content Row -->
           <div class="row">
@@ -529,61 +511,6 @@
     <script src="https://cdn.datatables.net/1.10.12/js/dataTables.bootstrap.min.js"></script>
     <link rel="stylesheet" href="https://cdn.datatables.net/1.10.12/css/dataTables.bootstrap.min.css">
     
-    
-    <script>
-/** 
-* Exibe confirmação de exclusão ao clicar no botão excluir 
-* O metodo confirmation() é de um componente do bootstrap
-* chamado bootstrap confirmation
-**/
-// $('table tbody').on('click','a[id^="person-delete"]', function (e) {
-//     e.preventDefault();
-//     $(this).confirmation('show');
-// });
 
-/**
-* o atributo "processing" define que os dados
-* da tabela poderá serão processados a cada
-* requisição.
-* 
-* O atributo "serverSide" informa que a tabela 
-* fará requisições no servidor para consultar 
-* novos dados.
-* 
-* O atributo "ajax" define para qual rota 
-* fará a requisição. Esta rota é a que contém
-* o json com os dados consultados pelo model. 
-*
-* O atributo columns é um array com todas as colunas 
-* e seus respectivos valores consultados no banco.
-*
-* data: 'name' é o nome da coluna na tabela
-* name: 'name' é o nome do campo vindo da consulta e seu valor.
-*
-* O campo "action" é responsável pela criação dos botões 
-* de editar e excluir a linha da tabela.
-*
-**/
-var table = $('#people-table').DataTable({
-    destroy: true,
-    lengthMenu: [ 5, 10, 15, 25, 50, 100, 'Todas' ],
-    responsive: true,
-    processing: true,
-    serverSide: true,
-    // ajax: "{!! route('listar') !!}",
-    // columns: [
-    //     {data: 'Nome', name: 'id'},
-    //     {data: 'CPF', name: 'id_client'},
-    //     {data: 'Carro', name: 'id_car'},
-    //     {data: 'Serviço', name: 'id_service'},
-    //     {
-    //         "data": "action",
-    //         "render": function(data, type, row, meta){
-    //             return '<a href="'+ $('link[rel="base"]').attr('href') + '/editar/' + row.id +'" class="btn btn-xs btn-info" title="Editar Pessoa"> <i class="fa fa-edit"></i></a> <a href="'+ $('link[rel="base"]').attr('href') + '/excluir/' + row.id +'" id="person-'+ row.id +'" class="btn btn-xs btn-danger" data-toggle="confirmation" data-btn-ok-label="Sim" data-btn-ok-class="btn-success" data-btn-ok-icon-class="material-icons" data-btn-ok-icon-content="" data-btn-cancel-label="Não" data-btn-cancel-class="btn-danger" data-btn-cancel-icon-class="material-icons" data-btn-cancel-icon-content="" data-title="Tem certeza que deseja excluir o cadastro de '+ row.name +'?" data-content="Esta ação não poderá ser desfeita." title="Excluir Pessoa"> <i class="fa fa-trash"></i></a>';
-    //         }
-    //     }
-    //     ],
-    });
-// </script>
 </body>
 @endsection
