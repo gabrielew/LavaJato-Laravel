@@ -81,6 +81,12 @@
             <li class="nav-item">
             <a class="nav-link" href="tables.html">
                 <i class="fas fa-fw fa-table"></i>
+                <span>Clientes</span></a>
+            </li>
+
+            <li class="nav-item">
+            <a class="nav-link" href="{{url('listservice')}}">
+                <i class="fas fa-chart-line"></i>
                 <span>Serviços realizados</span></a>
             </li>
 
@@ -306,6 +312,7 @@
                           
                         </tbody>
                     </table>
+                    {!! $datatable->links() !!}
                   </div>
                 </div>
               </div>
